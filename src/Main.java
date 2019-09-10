@@ -6,6 +6,7 @@ import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
@@ -24,7 +25,8 @@ public class Main extends Application{
         //0.template
 //        window = primaryStage;
 //        VBox vBox = new VBox();
-//        Scene scene = new Scene(vBox);
+//        vBox.getChildren().addAll(button);
+//        Scene scene = new Scene(vBox,300,200);
 //
 //        window.setScene(scene);
 //        window.setTitle("title here");
@@ -198,13 +200,24 @@ public class Main extends Application{
 
 
         //8.checkbox
-//        window = primaryStage;
-//        VBox vBox = new VBox();
-//        Scene scene = new Scene(vBox);
-//
-//        window.setScene(scene);
-//        window.setTitle("title here");
-//        window.show();
+        window = primaryStage;
+        Button button = new Button("order now");
+
+
+        //checkboxes
+        CheckBox c1 = new CheckBox("fish");
+        CheckBox c2 = new CheckBox("beef");
+        c2.setSelected(true);
+
+        button.setOnAction( e -> hundlePick(c1,c2));
+
+        VBox vBox = new VBox();
+        vBox.getChildren().addAll(c1,c2,button);
+        Scene scene = new Scene(vBox, 300,200);
+
+        window.setScene(scene);
+        window.setTitle("title here");
+        window.show();
 
     }
 
@@ -228,6 +241,21 @@ public class Main extends Application{
 //            return false;
 //        }
 //    }
+
+    //8.checkbox
+    private void hundlePick(CheckBox c1,CheckBox c2){
+        String massge = "";
+
+        if(c1.isSelected()){
+            massge+=c1.getText();
+        }
+
+        if(c2.isSelected()){
+            massge+=c2.getText();
+        }
+
+        System.out.println(massge + " added");
+    }
 
 
     public static void main(String[] args) {
