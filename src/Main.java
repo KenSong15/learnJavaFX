@@ -16,6 +16,7 @@ public class Main extends Application{
     Scene scene1, scene2;
     ComboBox<String> comboBox;
     ListView<String> listView;
+    TreeView<String> treeView;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -275,27 +276,68 @@ public class Main extends Application{
 //        window.show();
 
         //11.listview
+//        window = primaryStage;
+//        VBox vBox = new VBox();
+//        Button button = new Button("click me");
+//
+//        listView = new ListView<>();
+//        listView.getItems().addAll("M1", "M2", "M3", "M4");
+//        listView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE); //multiple selection
+//
+//        button.setOnAction(e->{
+//            String message="";
+//            ObservableList<String> movies;
+//            movies = listView.getSelectionModel().getSelectedItems();
+//
+//            for(String s: movies){
+//                message += s + "\n";
+//            }
+//
+//            System.out.println(message);
+//        });
+//
+//        vBox.getChildren().addAll(listView,button);
+//        Scene scene = new Scene(vBox,300,200);
+//
+//        window.setScene(scene);
+//        window.setTitle("title here");
+//        window.show();
+
+        //12.treeView
         window = primaryStage;
         VBox vBox = new VBox();
         Button button = new Button("click me");
 
-        listView = new ListView<>();
-        listView.getItems().addAll("M1", "M2", "M3", "M4");
-        listView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE); //multiple selection
+        TreeItem<String> root, food, movie;
 
-        button.setOnAction(e->{
-            String message="";
-            ObservableList<String> movies;
-            movies = listView.getSelectionModel().getSelectedItems();
+        //tree root
+        root = new TreeItem<>("root here");
+        root.setExpanded(true);
 
-            for(String s: movies){
-                message += s + "\n";
+
+        //food
+        food = makeBranch("Food", root);
+        makeBranch("shenzhen",food);
+        makeBranch("hongkong",food);
+        makeBranch("guangzhou",food);
+
+        //movie
+        movie = makeBranch("Movie", root);
+        makeBranch("pinguo",movie);
+        makeBranch("taozi",movie);
+
+        //create tree
+        treeView = new TreeView<String>(root);
+        treeView.setShowRoot(false);
+        treeView.getSelectionModel().selectedItemProperty()
+                .addListener((v, oldvalue, newvalue) -> {
+            if(newvalue != null){
+                System.out.println(newvalue.getValue());
             }
-
-            System.out.println(message);
         });
 
-        vBox.getChildren().addAll(listView,button);
+
+        vBox.getChildren().addAll(treeView,button);
         Scene scene = new Scene(vBox,300,200);
 
         window.setScene(scene);
@@ -303,6 +345,8 @@ public class Main extends Application{
         window.show();
 
     }
+
+
 
     //4.proper close
 //    private void closeProgram() {
@@ -339,6 +383,14 @@ public class Main extends Application{
 //
 //        System.out.println(massge + " added");
 //    }
+
+    private TreeItem<String> makeBranch(String title, TreeItem<String> root) {
+        TreeItem<String> item = new TreeItem<>(title);
+        item.setExpanded(true);
+
+        root.getChildren().add(item);
+        return item;
+    }
 
 
     public static void main(String[] args) {
