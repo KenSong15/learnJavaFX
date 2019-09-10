@@ -2,14 +2,13 @@ import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 public class Main extends Application{
@@ -112,30 +111,65 @@ public class Main extends Application{
 
         //5.embedding layout
 
+//        window = primaryStage;
+//
+//        Label label1 = new Label("embedding layout.");
+//
+//        HBox topMenu = new HBox();
+//        Button button1 = new Button("File");
+//        Button button2 = new Button("Edit");
+//        Button button3 = new Button("View");
+//        topMenu.getChildren().addAll(button1,button2,button3);
+//
+//        VBox leftMenu = new VBox();
+//        Button button4 = new Button("button 4");
+//        Button button5 = new Button("button 5");
+//        Button button6 = new Button("button 6");
+//        leftMenu.getChildren().addAll(button4,button5,button6);
+//
+//        BorderPane borderPane = new BorderPane();
+//        borderPane.setTop(topMenu);
+//        borderPane.setLeft(leftMenu);
+//
+//        scene1 = new Scene(borderPane, 200,200);
+//
+//        window.setScene(scene1);
+//        window.setTitle("title here");
+//        window.show();
+
+        //6. gridpane
         window = primaryStage;
+        window.setTitle("gridpane");
 
-        Label label1 = new Label("embedding layout.");
+        GridPane grid = new GridPane();
+        grid.setPadding(new Insets(10,10,10,10));
+        grid.setVgap(8);
+        grid.setHgap(10);
 
-        HBox topMenu = new HBox();
-        Button button1 = new Button("File");
-        Button button2 = new Button("Edit");
-        Button button3 = new Button("View");
-        topMenu.getChildren().addAll(button1,button2,button3);
+        //name label
+        Label nameLabel = new Label("Username: ");
+        GridPane.setConstraints(nameLabel, 0,0);
 
-        VBox leftMenu = new VBox();
-        Button button4 = new Button("button 4");
-        Button button5 = new Button("button 5");
-        Button button6 = new Button("button 6");
-        leftMenu.getChildren().addAll(button4,button5,button6);
+        //name input
+        TextField nameinput = new TextField("Ken");
+        GridPane.setConstraints(nameinput,1,0);
 
-        BorderPane borderPane = new BorderPane();
-        borderPane.setTop(topMenu);
-        borderPane.setLeft(leftMenu);
+        //password label
+        Label passwordlabel = new Label("Password: ");
+        GridPane.setConstraints(passwordlabel, 0,1);
 
-        scene1 = new Scene(borderPane, 200,200);
+        //name input
+        TextField psdinput = new TextField();
+        psdinput.setPromptText("password");
+        GridPane.setConstraints(psdinput,1,1);
 
-        window.setScene(scene1);
-        window.setTitle("title here");
+        Button loginButton = new Button("log in");
+        GridPane.setConstraints(loginButton,1,2);
+
+        grid.getChildren().addAll(nameLabel,nameinput,passwordlabel,psdinput,loginButton);
+
+        Scene scene = new Scene(grid,400,300);
+        window.setScene(scene);
         window.show();
 
     }
