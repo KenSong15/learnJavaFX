@@ -5,10 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
@@ -200,20 +197,48 @@ public class Main extends Application{
 
 
         //8.checkbox
+//        window = primaryStage;
+//        Button button = new Button("order now");
+//
+//
+//        //checkboxes
+//        CheckBox c1 = new CheckBox("fish");
+//        CheckBox c2 = new CheckBox("beef");
+//        c2.setSelected(true);
+//
+//        button.setOnAction( e -> hundlePick(c1,c2));
+//
+//        VBox vBox = new VBox();
+//        vBox.getChildren().addAll(c1,c2,button);
+//        Scene scene = new Scene(vBox, 300,200);
+//
+//        window.setScene(scene);
+//        window.setTitle("title here");
+//        window.show();
+
+
+        //0.template
         window = primaryStage;
-        Button button = new Button("order now");
-
-
-        //checkboxes
-        CheckBox c1 = new CheckBox("fish");
-        CheckBox c2 = new CheckBox("beef");
-        c2.setSelected(true);
-
-        button.setOnAction( e -> hundlePick(c1,c2));
-
         VBox vBox = new VBox();
-        vBox.getChildren().addAll(c1,c2,button);
-        Scene scene = new Scene(vBox, 300,200);
+        Button button = new Button("click me");
+
+        //dropdown
+        ChoiceBox<String> choiceBox = new ChoiceBox<>();
+
+        //get items then add to it
+        choiceBox.getItems().add("apples");
+        choiceBox.getItems().add("pear");
+        choiceBox.getItems().add("banana");
+        choiceBox.setValue("apples");
+
+        button.setOnAction(e -> {
+            System.out.println(choiceBox.getValue() + " selected");
+        });
+
+        vBox.getChildren().addAll(choiceBox, button);
+        vBox.setPadding(new Insets(10,10,10,10));
+        Scene scene = new Scene(vBox,300,200);
+
 
         window.setScene(scene);
         window.setTitle("title here");
@@ -243,19 +268,19 @@ public class Main extends Application{
 //    }
 
     //8.checkbox
-    private void hundlePick(CheckBox c1,CheckBox c2){
-        String massge = "";
-
-        if(c1.isSelected()){
-            massge+=c1.getText();
-        }
-
-        if(c2.isSelected()){
-            massge+=c2.getText();
-        }
-
-        System.out.println(massge + " added");
-    }
+//    private void hundlePick(CheckBox c1,CheckBox c2){
+//        String massge = "";
+//
+//        if(c1.isSelected()){
+//            massge+=c1.getText();
+//        }
+//
+//        if(c2.isSelected()){
+//            massge+=c2.getText();
+//        }
+//
+//        System.out.println(massge + " added");
+//    }
 
 
     public static void main(String[] args) {
