@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -87,35 +88,66 @@ public class Main extends Application{
 //        window.show();
 
         //4.proper close
+//        window = primaryStage;
+//
+//        Label label1 = new Label("this is the first scene.");
+//        Button button1 = new Button("proper close app");
+//
+//        button1.setOnAction(e -> closeProgram());
+//        window.setOnCloseRequest(e -> {
+//            e.consume();//take the control manually
+//            closeProgram();
+//        }); //two way close on same result
+//
+//        //layout 1 - children are laid out in vertical column
+//        VBox layout1 = new VBox(20);
+//        layout1.getChildren().addAll(label1,button1);
+//        scene1 = new Scene(layout1, 200,200);
+//
+//
+//        window.setScene(scene1);
+//        window.setTitle("title here");
+//        window.show();
+
+
+        //5.embedding layout
+
         window = primaryStage;
 
-        Label label1 = new Label("this is the first scene.");
-        Button button1 = new Button("proper close app");
+        Label label1 = new Label("embedding layout.");
 
-        button1.setOnAction(e -> closeProgram());
-        window.setOnCloseRequest(e -> {
-            e.consume();//take the control manually
-            closeProgram();
-        }); //two way close on same result
+        HBox topMenu = new HBox();
+        Button button1 = new Button("File");
+        Button button2 = new Button("Edit");
+        Button button3 = new Button("View");
+        topMenu.getChildren().addAll(button1,button2,button3);
 
-        //layout 1 - children are laid out in vertical column
-        VBox layout1 = new VBox(20);
-        layout1.getChildren().addAll(label1,button1);
-        scene1 = new Scene(layout1, 200,200);
+        VBox leftMenu = new VBox();
+        Button button4 = new Button("button 4");
+        Button button5 = new Button("button 5");
+        Button button6 = new Button("button 6");
+        leftMenu.getChildren().addAll(button4,button5,button6);
 
+        BorderPane borderPane = new BorderPane();
+        borderPane.setTop(topMenu);
+        borderPane.setLeft(leftMenu);
+
+        scene1 = new Scene(borderPane, 200,200);
 
         window.setScene(scene1);
         window.setTitle("title here");
         window.show();
+
     }
 
-    private void closeProgram() {
-        Boolean result = ConfirmBox.display("firm title", "are you sure you want to exit?");
-        if(result) {
-            System.out.println("file saved");
-            window.close();
-        }
-    }
+    //4.proper close
+//    private void closeProgram() {
+//        Boolean result = ConfirmBox.display("firm title", "are you sure you want to exit?");
+//        if(result) {
+//            System.out.println("file saved");
+//            window.close();
+//        }
+//    }
 
 
     public static void main(String[] args) {
