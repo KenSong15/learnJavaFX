@@ -12,7 +12,8 @@ import javafx.stage.Stage;
 public class Main extends Application{
 
     Stage window;
-    //Scene scene1, scene2;
+    Scene scene1, scene2;
+    ComboBox<String> comboBox;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -22,6 +23,7 @@ public class Main extends Application{
         //0.template
 //        window = primaryStage;
 //        VBox vBox = new VBox();
+//        Button button = new Button("click me");
 //        vBox.getChildren().addAll(button);
 //        Scene scene = new Scene(vBox,300,200);
 //
@@ -218,33 +220,53 @@ public class Main extends Application{
 
 
         //9.choice box
+//        window = primaryStage;
+//        VBox vBox = new VBox();
+//        Button button = new Button("click me");
+//
+//        //dropdown
+//        ChoiceBox<String> choiceBox = new ChoiceBox<>();
+//
+//        //get items then add to it
+//        choiceBox.getItems().add("apples");
+//        choiceBox.getItems().add("pear");
+//        choiceBox.getItems().add("banana");
+//        choiceBox.setValue("apples");
+//
+//        //listen for selection changes
+//        choiceBox.getSelectionModel().selectedItemProperty().addListener( (v, oldvalue, newvalue) -> {
+//            System.out.println(oldvalue + " is the old value");
+//            System.out.println(newvalue + " is the new value");
+//        } );
+//
+//        button.setOnAction(e -> {
+//            System.out.println(choiceBox.getValue() + " selected");
+//        });
+//
+//        vBox.getChildren().addAll(choiceBox, button);
+//        vBox.setPadding(new Insets(10,10,10,10));
+//        Scene scene = new Scene(vBox,300,200);
+//
+//        window.setScene(scene);
+//        window.setTitle("title here");
+//        window.show();
+
+
+        //10.combobox
         window = primaryStage;
         VBox vBox = new VBox();
         Button button = new Button("click me");
 
-        //dropdown
-        ChoiceBox<String> choiceBox = new ChoiceBox<>();
+        comboBox = new ComboBox<>();
+        comboBox.getItems().addAll("food1", "food2", "drink1", "drink2");
+        comboBox.setPromptText("what do you like?");
+        comboBox.setEditable(true);
 
-        //get items then add to it
-        choiceBox.getItems().add("apples");
-        choiceBox.getItems().add("pear");
-        choiceBox.getItems().add("banana");
-        choiceBox.setValue("apples");
+        button.setOnAction(e->System.out.println(comboBox.getValue() + " get selected"));
+        comboBox.setOnAction(e->System.out.println(comboBox.getValue() + " new value selected"));
 
-        //listen for selection changes
-        choiceBox.getSelectionModel().selectedItemProperty().addListener( (v, oldvalue, newvalue) -> {
-            System.out.println(oldvalue + " is the old value");
-            System.out.println(newvalue + " is the new value");
-        } );
-
-        button.setOnAction(e -> {
-            System.out.println(choiceBox.getValue() + " selected");
-        });
-
-        vBox.getChildren().addAll(choiceBox, button);
-        vBox.setPadding(new Insets(10,10,10,10));
+        vBox.getChildren().addAll(comboBox,button);
         Scene scene = new Scene(vBox,300,200);
-
 
         window.setScene(scene);
         window.setTitle("title here");
