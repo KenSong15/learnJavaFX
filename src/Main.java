@@ -217,7 +217,7 @@ public class Main extends Application{
 //        window.show();
 
 
-        //0.template
+        //9.choice box
         window = primaryStage;
         VBox vBox = new VBox();
         Button button = new Button("click me");
@@ -230,6 +230,12 @@ public class Main extends Application{
         choiceBox.getItems().add("pear");
         choiceBox.getItems().add("banana");
         choiceBox.setValue("apples");
+
+        //listen for selection changes
+        choiceBox.getSelectionModel().selectedItemProperty().addListener( (v, oldvalue, newvalue) -> {
+            System.out.println(oldvalue + " is the old value");
+            System.out.println(newvalue + " is the new value");
+        } );
 
         button.setOnAction(e -> {
             System.out.println(choiceBox.getValue() + " selected");
