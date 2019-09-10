@@ -1,4 +1,5 @@
 import javafx.application.Application;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -14,6 +15,7 @@ public class Main extends Application{
     Stage window;
     Scene scene1, scene2;
     ComboBox<String> comboBox;
+    ListView<String> listView;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -253,19 +255,47 @@ public class Main extends Application{
 
 
         //10.combobox
+//        window = primaryStage;
+//        VBox vBox = new VBox();
+//        Button button = new Button("click me");
+//
+//        comboBox = new ComboBox<>();
+//        comboBox.getItems().addAll("food1", "food2", "drink1", "drink2");
+//        comboBox.setPromptText("what do you like?");
+//        comboBox.setEditable(true);
+//
+//        button.setOnAction(e->System.out.println(comboBox.getValue() + " get selected"));
+//        comboBox.setOnAction(e->System.out.println(comboBox.getValue() + " new value selected"));
+//
+//        vBox.getChildren().addAll(comboBox,button);
+//        Scene scene = new Scene(vBox,300,200);
+//
+//        window.setScene(scene);
+//        window.setTitle("title here");
+//        window.show();
+
+        //11.listview
         window = primaryStage;
         VBox vBox = new VBox();
         Button button = new Button("click me");
 
-        comboBox = new ComboBox<>();
-        comboBox.getItems().addAll("food1", "food2", "drink1", "drink2");
-        comboBox.setPromptText("what do you like?");
-        comboBox.setEditable(true);
+        listView = new ListView<>();
+        listView.getItems().addAll("M1", "M2", "M3", "M4");
+        listView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE); //multiple selection
 
-        button.setOnAction(e->System.out.println(comboBox.getValue() + " get selected"));
-        comboBox.setOnAction(e->System.out.println(comboBox.getValue() + " new value selected"));
+        button.setOnAction(e->{
+            String message="";
+            ObservableList<String> movies;
+            movies = listView.getSelectionModel().getSelectedItems();
 
-        vBox.getChildren().addAll(comboBox,button);
+            for(String s: movies){
+                message += s + "\n";
+            }
+
+            System.out.println(message);
+        });
+
+        vBox.getChildren().addAll(listView,button);
         Scene scene = new Scene(vBox,300,200);
 
         window.setScene(scene);
