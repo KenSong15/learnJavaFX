@@ -46,7 +46,7 @@ public class Main extends Application{
 //        window.setScene(scene1);
 //        window.setTitle("title here");
 //        window.show();
-//        //switch scene done===
+
 
         //2. alert window===
 //        window = primaryStage;
@@ -64,18 +64,39 @@ public class Main extends Application{
 //        window.setScene(scene1);
 //        window.setTitle("title here");
 //        window.show();
-        //allert window===
 
 
         //3.confirmBox
+//        window = primaryStage;
+//
+//        Label label1 = new Label("this is the first scene.");
+//        Button button1 = new Button("show confirm");
+//        button1.setOnAction(e -> {
+//            boolean result = ConfirmBox.display("a title", "are you sure?");
+//            label1.setText("it said: " + String.valueOf(result));
+//        });
+//
+//        //layout 1 - children are laid out in vertical column
+//        VBox layout1 = new VBox(20);
+//        layout1.getChildren().addAll(label1,button1);
+//        scene1 = new Scene(layout1, 200,200);
+//
+//
+//        window.setScene(scene1);
+//        window.setTitle("title here");
+//        window.show();
+
+        //4.proper close
         window = primaryStage;
 
         Label label1 = new Label("this is the first scene.");
-        Button button1 = new Button("show confirm");
-        button1.setOnAction(e -> {
-            boolean result = ConfirmBox.display("a title", "are you sure?");
-            label1.setText("it said: " + String.valueOf(result));
-        });
+        Button button1 = new Button("proper close app");
+
+        button1.setOnAction(e -> closeProgram());
+        window.setOnCloseRequest(e -> {
+            e.consume();//take the control manually
+            closeProgram();
+        }); //two way close on same result
 
         //layout 1 - children are laid out in vertical column
         VBox layout1 = new VBox(20);
@@ -86,7 +107,14 @@ public class Main extends Application{
         window.setScene(scene1);
         window.setTitle("title here");
         window.show();
-        //
+    }
+
+    private void closeProgram() {
+        Boolean result = ConfirmBox.display("firm title", "are you sure you want to exit?");
+        if(result) {
+            System.out.println("file saved");
+            window.close();
+        }
     }
 
 
